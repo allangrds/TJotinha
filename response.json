@@ -1,0 +1,56 @@
+{
+    "processo": {
+        "numero": "",
+        "classe": "",
+        "area": "",
+        "local_fisico": "",
+        "distribuicao": {
+            "data": "",
+            "tipo": "",
+            "local": ""
+        },
+        "controle": "",
+        "juiz": "",
+        "outros_numeros": "",
+        "valor_da_acao": ""
+    },
+    "partes": {
+        "requerentes": [
+            ""
+        ],
+        "requeridos": [
+            ""
+        ]
+    },
+    "movimentacoes": [
+        {
+            "data": "",
+            "documento": "",
+            "movimento": {
+                "titulo": {
+                    "texto": "",
+                    "link": ""
+                },
+                "conteudo": ""
+            }
+        }
+    ],
+    "peticoes_diversas": [
+        {
+            "data": "",
+            "tipo": ""
+        }
+    ],
+    "audiencias": [
+        ""
+    ],
+    "historico_classes": [
+        {
+            "data": "",
+            "tipo": "",
+            "classe": "",
+            "area": "",
+            "motivo": ""
+        }
+    ]
+}
