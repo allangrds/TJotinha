@@ -1,4 +1,11 @@
 {
+  "name": "TJotinha",
+  "version": "1.0.0",
+  "description": "Obtendo os dados dos processos dos TJs",
+  "main": "index.js",
+  "repository": "git@github.com:allangrds/tjotinha.git",
+  "author": "Allan Ramos <allangrds@gmail.com>",
+  "private": true,
   "dependencies": {
     "crawler": "1.2.0",
     "jsdom": "12.0.0",
