@@ -1,5 +1,5 @@
 function makeMovimentacoesObject(document) {
-    const tabela = document.getElementById('tabelaUltimasMovimentacoes');
+    const tabela = document.getElementById('tabelaTodasMovimentacoes');
     const linhas = tabela.querySelectorAll('tr');
     let movimentacoes = []
 
@@ -22,7 +22,9 @@ function makeMovimentacoesObject(document) {
         ];
     });
     
-    return movimentacoes;
+    return {
+        movimentacoes
+    };
 }
 
 function getTitulo(arr) {

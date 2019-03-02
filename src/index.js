@@ -3,6 +3,8 @@ const jsdom = require("jsdom");
 const processoMaker = require('./processo');
 const partesProcessoMaker = require('./partes_processo');
 const movimentacoesMaker = require('./movimentacoes');
+const peticoesDiversasMaker = require('./peticoesDiversas');
+const historicoClassesMaker = require('./historicoClasses');
 
 const { JSDOM } = jsdom;
 
@@ -58,10 +60,18 @@ function makeProcessoObject(document) {
     const processoObj = processoMaker(document);
     const partesProcessoObj = partesProcessoMaker(document);
     const movimentacoesObj = movimentacoesMaker(document);
+    const peticoesDiversasObj = peticoesDiversasMaker(document);
+    const historicoClassesObj = historicoClassesMaker(document);
 
-    return {
+    const res = {
         ...processoObj,
         ...partesProcessoObj,
-        movimentacoes: movimentacoesObj,
+        ...movimentacoesObj,
+        ...peticoesDiversasObj,
+        ...historicoClassesObj
     };
+
+    //JSON.stringify
+
+    return res;
 }

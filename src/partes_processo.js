@@ -32,11 +32,11 @@ function makeAdvogados(html) {
 function makeParte(processoColumns, index) {
     const processoNumberColumns = processoColumns[index];
     const html = processoNumberColumns.innerHTML;
-    const orgao = (html.substr(0, html.indexOf('<br>'))).trim();
+    const nome = (html.substr(0, html.indexOf('<br>'))).trim();
     const advogados = makeAdvogados(html);
 
     return {
-        orgao,
+        nome,
         advogados,
     }
 }
