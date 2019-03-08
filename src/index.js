@@ -1,77 +1,43 @@
-var Crawler = require("crawler");
-const jsdom = require("jsdom");
-const processoMaker = require('./processo');
-const partesProcessoMaker = require('./partes_processo');
-const movimentacoesMaker = require('./movimentacoes');
-const peticoesDiversasMaker = require('./peticoesDiversas');
-const historicoClassesMaker = require('./historicoClasses');
+import config from './config'
+import crawler from './crawler'
 
-const { JSDOM } = jsdom;
+let url = ''
+let state = ''
+let searchType = ''
 
-var c = new Crawler({
-    maxConnections : 1,
-    callback : function (error, res, done) {
-        if(error){
-            console.log(error);
-        }else{
-            var $ = res.$;
-            // $ is Cheerio by default
-            //a lean implementation of core jQuery designed specifically for the server
-            console.log($("title").text());
-        }
-        done();
-    }
-});
+function init (tjState, typeOption) {
+  const baseUrl = config[tjState].base_url
+  const typeFieldName = config[tjState].search_type.field_name
+  const typeValue = config[tjState].search_type.values[typeOption || searchType]
 
-const processo = '04184426819928260053';
-const baseUrl = 'http://esaj.tjsp.jus.br/cpopg/search.do?dadosConsulta.localPesquisa.cdLocal=-1&cbPesquisa=NUMPROC&dadosConsulta.valorConsulta=';
+  url = `${baseUrl}${typeFieldName}=${typeValue}`
 
-c.queue([{
-    uri: baseUrl+processo,
-    jQuery: false,
+  if (tjState) {
+    state = tjState
+  }
 
-    // The global callback won't be called
-    callback: function (error, res, done) {
-        if(error){
-            console.log(error);
-        }else{
-            //console.log('Grabbed', res.body.length, 'bytes');
-            handleRequestSuccess(res.body);
-        }
-        done();
-    }
-}]);
-
-function handleRequestSuccess(body) {
-    const dom = new JSDOM(body);
-    const document = dom.window.document;
-
-    const warning = document.getElementById('mensagemRetorno');
-    if(warning) {
-        console.log(warning[0]);
-    }
-
-    let dadosDoProcesso = makeProcessoObject(document);
-
-    console.log(dadosDoProcesso);
+  if (typeOption) {
+    searchType = typeOption
+  }
 }
 
-function makeProcessoObject(document) {
-    const processoObj = processoMaker(document);
-    const partesProcessoObj = partesProcessoMaker(document);
-    const movimentacoesObj = movimentacoesMaker(document);
-    const peticoesDiversasObj = peticoesDiversasMaker(document);
-    const historicoClassesObj = historicoClassesMaker(document);
+function find (value, tjState, typeOption) {
+  if (tjState || typeOption) {
+    init(tjState, typeOption)
+  }
 
-    const res = {
-        ...processoObj,
-        ...partesProcessoObj,
-        ...movimentacoesObj,
-        ...peticoesDiversasObj,
-        ...historicoClassesObj
-    };
+  if (!state && !searchType) {
+    throw new Error('Falta o estado e/ou o tipo da pesquisa')
+  }
 
-    //JSON.stringify
+  const completeUrl = url.replace('{value}', value)
 
-    return res;
+  return crawler(completeUrl)
 }
+
+export {
+  init,
+  find,
+}
+
+console.log(find('04184426819928260053', 'sp', 'process_number'))

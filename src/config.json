@@ -1,0 +1,18 @@
+{
+  "sp": {
+    "base_url": "http://esaj.tjsp.jus.br/cpopg/search.do?dadosConsulta.localPesquisa.cdLocal=-1&dadosConsulta.valorConsulta={value}&",
+    "search_type": {
+      "field_name": "cbPesquisa",
+      "values": {
+        "process_number": "NUMPROC",
+        "part_name": "NMPARTE",
+        "part_document": "DOCPARTE",
+        "lawyer_name": "NMADVOGADO",
+        "lawyer_identification": "NUMOAB",
+        "letter_formal_notice_number": "PRECATORIA",
+        "document_number_police_station": "DOCDELEG",
+        "cda": "NUMCDA"
+      }
+    }
+  }
+}
