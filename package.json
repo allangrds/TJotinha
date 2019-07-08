@@ -10,12 +10,13 @@
     "crawler": "1.2.0",
     "jsdom": "12.0.0",
     "ramda": "0.25.0",
-    "snyk": "1.108.2"
+    "snyk": "^1.192.4"
   },
   "scripts": {
     "snyk-protect": "snyk protect",
     "prepare": "yarn run snyk-protect; npm run snyk-protect",
-    "test": "snyk test"
+    "test": "snyk test",
+    "prepublish": "npm run snyk-protect"
   },
   "snyk": true
 }
